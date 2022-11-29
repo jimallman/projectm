@@ -70,6 +70,9 @@ public:
     /// the pipeline context and beat detection unit
     void update (const BeatDetect & music, const PipelineContext & context);
 
+    /* q variables */
+    float q[numQVariables]{};
+
     private:
 };
 

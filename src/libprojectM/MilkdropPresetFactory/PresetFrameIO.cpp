@@ -40,6 +40,13 @@ void PresetInputs::update(const BeatDetect & music, const PipelineContext & cont
 
     this->aspectx = context.aspectx;
     this->aspecty = context.aspecty;
+
+    /* TODO: Update Q variables if modified by an API caller... where?
+    for (unsigned int i = 0; i < numQVariables; i++)
+    {
+        this->q[i] = context->q[i];
+    }
+    */
 }
 
 

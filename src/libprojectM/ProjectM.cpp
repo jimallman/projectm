@@ -22,10 +22,12 @@
 #include "ProjectM.hpp"
 
 #include "BeatDetect.hpp"
+#include "MilkdropPreset.hpp"
 #include "ConfigFile.h"
 #include "PCM.hpp" //Sound data handler (buffering, FFT, etc.)
 #include "PipelineMerger.hpp"
 #include "Preset.hpp"
+#include "MilkdropPresetFactory/PresetFrameIO.hpp"
 #include "PresetChooser.hpp"
 #include "Renderer.hpp"
 #include "TimeKeeper.hpp"
@@ -1053,6 +1055,18 @@ std::vector<qvar_info> ProjectM::FetchQVars()
 
 void ProjectM::UpdateQVars(std::vector<qvar_info> q_vars)
 {
-    m_activePreset->name();
     // inject the provided values on the *next* rendered frame
+    for (unsigned int i = 0; i < numQVariables; i++)
+    {
+        if (q_vars[i].value != NULL)
+        {
+            MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
+            preset->presetOutputs().q[i] = q_vars[i].value;
+            // TODO: Or should this modify preset->presetInputs()? much harder, because it's a constant
+            /*
+            PresetInputs mutable_inputs = const_cast<PresetInputs>(preset->presetInputs());
+            mutable_inputs.q[i] = q_vars[i].value;
+            */
+        }
+    }
 }
