@@ -68,6 +68,15 @@ class TimeKeeper;
 
 class Pipeline;
 
+/*
+ * Bundle information about a single Q variable
+ */
+struct qvar_info {
+    std::string q_name;
+    std::string alt_names;
+    double init_value;
+};
+
 class ProjectM
 {
 public:
@@ -299,6 +308,11 @@ public:
      */
     void DumpDebugImageOnNextFrame();
 
+    std::vector<qvar_info> FetchQVars();
+
+    void UpdateQVars(std::vector<qvar_info> q_vars);
+
+
 private:
     void EvaluateSecondPreset();
 
@@ -376,3 +390,4 @@ private:
     BackgroundWorkerSync m_workerSync;                //!< Background work synchronizer.
 #endif
 };
+

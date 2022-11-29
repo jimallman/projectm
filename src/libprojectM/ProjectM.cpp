@@ -1042,3 +1042,17 @@ void ProjectM::RecreateRenderer()
                                             m_settings.meshX, m_settings.meshY,
                                             m_beatDetect.get(), m_textureSearchPaths);
 }
+
+std::vector<qvar_info> ProjectM::FetchQVars()
+{
+    std::vector<qvar_info> q_vars;
+    // parse the current preset to find any Q vars that are *used*
+    m_activePreset->name();
+    return q_vars;
+}
+
+void ProjectM::UpdateQVars(std::vector<qvar_info> q_vars)
+{
+    m_activePreset->name();
+    // inject the provided values on the *next* rendered frame
+}

@@ -605,6 +605,25 @@ void projectm_set_preset_rating(projectm_handle instance, unsigned int index, in
     projectMInstance->ChangePresetRating(index, rating, static_cast<PresetRatingType>(rating_type));
 }
 
+/*
+ * Get/set Q variables for the current preset
+ */
+
+std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance, unsigned int index, std::vector<qvar_info> q_vars)
+{
+    // return all names for Q[1-32] found in this preset, plus alt names and initial values
+    auto projectMInstance = handle_to_instance(instance);
+    return projectMInstance->FetchQVars();
+}
+
+void projectm_set_preset_qvars(projectm_handle instance, unsigned int index, std::vector<qvar_info> q_vars)
+{
+    // update Q[1-32] vars for the next frame
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->UpdateQVars(q_vars);
+}
+
+
 unsigned int projectm_get_playlist_size(projectm_handle instance)
 {
     auto projectMInstance = handle_to_instance(instance);
