@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include "ProjectM.hpp"
 #include "projectM_export.h"
 #include "event.h"
 
@@ -125,6 +124,15 @@ typedef enum
     PROJECTM_TOUCH_TYPE_LINE, //!< Draws a single-line waveform.
     PROJECTM_TOUCH_TYPE_DOUBLE_LINE //!< Draws a double-line waveform.
 } projectm_touch_type;
+
+/**
+ * Bundle information about a single Q variable
+ */
+struct qvar_info {
+    std::string q_name;
+    std::string alt_names;
+    float value;
+};
 
 /**
  * @brief Allocates memory for a string and returns the pointer.

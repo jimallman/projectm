@@ -68,15 +68,6 @@ class TimeKeeper;
 
 class Pipeline;
 
-/*
- * Bundle information about a single Q variable
- */
-struct qvar_info {
-    std::string q_name;
-    std::string alt_names;
-    float value;
-};
-
 class ProjectM
 {
 public:
