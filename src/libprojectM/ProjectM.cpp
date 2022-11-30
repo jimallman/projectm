@@ -1047,9 +1047,33 @@ void ProjectM::RecreateRenderer()
 
 std::vector<qvar_info> ProjectM::FetchQVars()
 {
-    std::vector<qvar_info> q_vars;
     // parse the current preset to find any Q vars that are *used*
-    m_activePreset->name();
+    std::vector<qvar_info> q_vars;  // include only as many params as we find
+    // TODO: interrogate the equation trees for m_activePreset? or check built-in parameters?
+    MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
+    for (unsigned int i = 0; i < numQVariables; i++)
+    {
+        // search built-in params for each possible Q-var name (Q1 to Q32)
+        std::ostringstream os;
+        os << "q" << i + 1;
+        std::string searchable_name = std::string(os.str().c_str());
+        Param* found_param = preset->builtinParams.find_builtin_param(searchable_name);
+        if (found_param != NULL)
+        {
+            // if ((param = preset->builtinParams.find_builtin_param(std::string(string))) == NULL)
+            if (found_param->flags & P_FLAG_QVAR)  // just a sanity check, should already be a Q var
+            {
+                // build up qvar_info and add it to q_vars
+                qvar_info found_var; // = new qvar_info();
+                found_var.q_name = searchable_name;
+                found_var.alt_names = "TODO foo bar_BAZZ";
+                found_var.value = float(found_param->default_init_val.float_val);  // should be its *initial* value!
+                // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
+                q_vars.push_back(found_var);
+            }
+        }
+    }
+    // this list should be ordered but sparse, e.g. (Q1, Q2, Q4, Q32)
     return q_vars;
 }
 
@@ -1062,8 +1086,8 @@ void ProjectM::UpdateQVars(std::vector<qvar_info> q_vars)
         {
             MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
             preset->presetOutputs().q[i] = q_vars[i].value;
-            // TODO: Or should this modify preset->presetInputs()? much harder, because it's a constant
             /*
+             * TODO: Or should this modify preset->presetInputs (tricky, because it's a constant)?
             PresetInputs mutable_inputs = const_cast<PresetInputs>(preset->presetInputs());
             mutable_inputs.q[i] = q_vars[i].value;
             */

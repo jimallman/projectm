@@ -74,7 +74,7 @@ class Pipeline;
 struct qvar_info {
     std::string q_name;
     std::string alt_names;
-    double value;
+    float value;
 };
 
 class ProjectM
