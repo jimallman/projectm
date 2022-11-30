@@ -68,6 +68,19 @@ class TimeKeeper;
 
 class Pipeline;
 
+#ifndef _QVAR_INFO
+#define _QVAR_INFO
+/**
+ * Bundle information about a single Q variable
+ * TODO: Refactor this definition to just one place!
+ */
+struct qvar_info {
+    std::string q_name;
+    std::string alt_names;
+    float value;
+};
+#endif
+
 class ProjectM
 {
 public:
