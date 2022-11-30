@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "ProjectM.hpp"
 #include "projectM_export.h"
 #include "event.h"
 
