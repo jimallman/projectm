@@ -822,14 +822,14 @@ PROJECTM_EXPORT void projectm_set_preset_rating(projectm_handle instance, unsign
  * @brief Gets all Q variables defined in the current preset.
  * @param instance The projectM instance handle.
  */
-PROJECTM_EXPORT std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance)
+PROJECTM_EXPORT std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance);
 
 /**
  * @brief Sets some or all Q variables defined in the current preset.
  * @param instance The projectM instance handle.
  * @param q_vars A structure with named Q variables and new value for each
  */
-PROJECTM_EXPORT void projectm_set_preset_qvars(projectm_handle instance, std::vector<qvar_info> q_vars)
+PROJECTM_EXPORT void projectm_set_preset_qvars(projectm_handle instance, std::vector<qvar_info> q_vars);
 
 /**
  * @brief Returns the number of presets in the current playlist.
