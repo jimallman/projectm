@@ -616,7 +616,7 @@ std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance)
     return projectMInstance->FetchQVars();
 }
 
-void projectm_set_preset_qvars(projectm_handle instance, unsigned int index, std::vector<qvar_info> q_vars)
+void projectm_set_preset_qvars(projectm_handle instance, std::vector<qvar_info> q_vars)
 {
     // update Q[1-32] vars for the next frame
     auto projectMInstance = handle_to_instance(instance);
