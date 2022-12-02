@@ -28,6 +28,7 @@
 #include "PipelineMerger.hpp"
 #include "Preset.hpp"
 #include "MilkdropPresetFactory/PresetFrameIO.hpp"
+#include "ParamUtils.hpp"
 #include "PresetChooser.hpp"
 #include "Renderer.hpp"
 #include "TimeKeeper.hpp"
@@ -1048,16 +1049,20 @@ void ProjectM::RecreateRenderer()
 std::vector<qvar_info> ProjectM::FetchQVars()
 {
     // parse the current preset to find any Q vars that are *used*
-    std::vector<qvar_info> q_vars;  // include only as many params as we find
+    std::vector<qvar_info> q_vars(32);  // include only as many params as we find
     // TODO: interrogate the equation trees for m_activePreset? or check built-in parameters?
     MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
+    /* Argh, this doesn't work (and probably wouldn't have access to comments)
     for (unsigned int i = 0; i < numQVariables; i++)
     {
         // search built-in params for each possible Q-var name (Q1 to Q32)
         std::ostringstream os;
         os << "q" << i + 1;
         std::string searchable_name = std::string(os.str().c_str());
-        Param* found_param = preset->builtinParams.find_builtin_param(searchable_name);
+        //Param* found_param = preset->builtinParams.find_builtin_param(searchable_name);
+        Param* found_param = ParamUtils::find(searchable_name,
+            (BuiltinParams *) & preset->builtinParams,
+            (std::map<std::string, Param *> *) & preset->user_param_tree);
         if (found_param != NULL)
         {
             // if ((param = preset->builtinParams.find_builtin_param(std::string(string))) == NULL)
@@ -1073,6 +1078,70 @@ std::vector<qvar_info> ProjectM::FetchQVars()
             }
         }
     }
+    */
+    // Let's try again, by parsing the source text file directly
+    std::string presetPath = preset->absoluteFilePath();
+    std::ifstream file(presetPath);
+
+    // TEST ONLY
+    qvar_info found_var; // = new qvar_info();
+    found_var.q_name = presetPath;
+    found_var.alt_names = "TODO foo bar_BAZZ";
+    found_var.value = float(0.0);  // should be its *initial* value!
+    // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
+    q_vars.push_back(found_var);
+
+    if (file.is_open()) 
+    {
+        // read in each line
+        std::string line;
+        while (std::getline(file, line)) 
+        {
+            ///printf("%s", line.c_str());
+
+
+            // TEST ONLY
+            // build up qvar_info and add it to q_vars
+            qvar_info found_var; // = new qvar_info();
+            found_var.q_name = (std::string)(line.c_str());
+            found_var.alt_names = "TODO foo bar_BAZZ";
+            found_var.value = float(0.0);  // should be its *initial* value!
+            // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
+            q_vars.push_back(found_var);
+
+            /*
+            // does it have a comment delimiter '//'? is so, capture the remainder and strip full comment
+            if ()
+            {
+            }
+            // does it have a Q-var name before '.*='?
+            if ()
+            {
+                // if yes, capture the var-name
+            } 
+            else 
+            {
+                // if no, skip to next line
+            }
+            // is var-name already in our q_vars?
+            if ()
+            {
+                // if yes, does its entry have a comment already?
+                if () 
+                {
+                    // if no, add the comment we just captured
+                }
+            }
+            else
+            {
+                // if no, add an entry with this name and comment
+            }
+            // add the found/initial value (IF it's a simple type vs expression?)
+            */
+        }
+        file.close();
+    }
+    // sort the completed q_vars by Q-name (split and compar *number* component!)
     // this list should be ordered but sparse, e.g. (Q1, Q2, Q4, Q32)
     return q_vars;
 }
