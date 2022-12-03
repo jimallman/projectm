@@ -1085,7 +1085,7 @@ std::vector<qvar_info> ProjectM::FetchQVars()
 
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
-    found_var.q_name = (std::string) &presetPath;
+    found_var.q_name = presetPath;
     found_var.alt_names = "Eenie Meanie Miney Moe";
     found_var.value = float(1.23);  // should be its *initial* value!
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
