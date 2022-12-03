@@ -1049,7 +1049,7 @@ void ProjectM::RecreateRenderer()
 std::vector<qvar_info> ProjectM::FetchQVars()
 {
     // parse the current preset to find any Q vars that are *used*
-    std::vector<qvar_info> q_vars(32);  // include only as many params as we find
+    std::vector<qvar_info> q_vars;  // include only as many params as we find
     // TODO: interrogate the equation trees for m_activePreset? or check built-in parameters?
     MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
     /* Argh, this doesn't work (and probably wouldn't have access to comments)
@@ -1085,9 +1085,9 @@ std::vector<qvar_info> ProjectM::FetchQVars()
 
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
-    found_var.q_name = presetPath;
-    found_var.alt_names = "TODO foo bar_BAZZ";
-    found_var.value = float(0.0);  // should be its *initial* value!
+    found_var.q_name = std::string &presetPath;
+    found_var.alt_names = "Eenie Meanie Miney Moe";
+    found_var.value = float(1.23);  // should be its *initial* value!
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
     q_vars.push_back(found_var);
 
