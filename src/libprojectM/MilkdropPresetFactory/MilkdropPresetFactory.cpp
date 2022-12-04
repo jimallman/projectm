@@ -240,10 +240,12 @@ MilkdropPresetFactory::allocate(const std::string& url, const std::string& name,
     std::string path;
     if (PresetFactory::protocol(url, path) == PresetFactory::IDLE_PRESET_PROTOCOL)
     {
+        DEBUG("allocating? idle? preset using IDLE_PRESET_PROTOCOL... url='%s', name='%s', path='%s'", url.c_str(), name.c_str(), path.c_str());
         return IdlePresets::allocate(this, path, presetOutputs);
     }
     else
     {
+        DEBUG("returning new preset... url='%s', name='%s', path='%s'", url.c_str(), name.c_str(), path.c_str());
         return std::unique_ptr<Preset>(new MilkdropPreset(this, url, name, presetOutputs));
     }
 }
