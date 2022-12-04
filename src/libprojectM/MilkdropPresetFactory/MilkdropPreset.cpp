@@ -74,7 +74,9 @@ MilkdropPreset::MilkdropPreset(MilkdropPresetFactory* factory, const std::string
     , _factory(factory)
     , _presetOutputs(presetOutputs)
 {
-    DEBUG(">>> absoluteFilePath is %s", absoluteFilePath.c_str());
+    //TODO: DEBUG(">>> absoluteFilePath is %s", absoluteFilePath.c_str());
+	std::cerr << "[cerr] absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
+	std::cout << "[cout] absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
     initialize(absoluteFilePath);
 }
 
