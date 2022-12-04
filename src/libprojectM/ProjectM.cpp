@@ -1080,12 +1080,12 @@ std::vector<qvar_info> ProjectM::FetchQVars()
     }
     */
     // Let's try again, by parsing the source text file directly
-    std::string presetPath = preset->absoluteFilePath;
+    std::string presetPath = preset->absoluteFilePath();
     //std::string presetPath = m_settings.presetPath;
     std::ifstream file(presetPath.c_str());
 
     // TEST ONLY
-    qvar_info found_var; // = new qvar_info();
+    //qvar_info found_var; // = new qvar_info();
     found_var.q_name = presetPath;
     found_var.alt_names = "Eenie Meanie Miney Moe";
     found_var.value = float(1.23);  // should be its *initial* value!
