@@ -1085,7 +1085,7 @@ std::vector<qvar_info> ProjectM::FetchQVars()
     std::ifstream file(presetPath.c_str());
 
     // TEST ONLY
-    //qvar_info found_var; // = new qvar_info();
+    qvar_info found_var; // = new qvar_info();
     found_var.q_name = presetPath;
     found_var.alt_names = "Eenie Meanie Miney Moe";
     found_var.value = float(1.23);  // should be its *initial* value!
@@ -1103,7 +1103,7 @@ std::vector<qvar_info> ProjectM::FetchQVars()
 
             // TEST ONLY
             // build up qvar_info and add it to q_vars
-            qvar_info found_var; // = new qvar_info();
+            //qvar_info found_var; // = new qvar_info();
             found_var.q_name = (std::string)(line.c_str());
             found_var.alt_names = "TODO foo bar_BAZZ";
             found_var.value = float(0.0);  // should be its *initial* value!
