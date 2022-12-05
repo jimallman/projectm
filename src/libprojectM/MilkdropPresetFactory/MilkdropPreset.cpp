@@ -60,6 +60,7 @@ MilkdropPreset::MilkdropPreset(MilkdropPresetFactory* factory, std::istream& in,
     , _factory(factory)
     , _presetOutputs(presetOutputs)
 {
+	std::cout << "[cout] created from stream, absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
     initialize(in);
 }
 
@@ -75,8 +76,7 @@ MilkdropPreset::MilkdropPreset(MilkdropPresetFactory* factory, const std::string
     , _presetOutputs(presetOutputs)
 {
     //TODO: DEBUG(">>> absoluteFilePath is %s", absoluteFilePath.c_str());
-	std::cerr << "[cerr] absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
-	std::cout << "[cout] absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
+	std::cout << "[cout] created from path, absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
     initialize(absoluteFilePath);
 }
 
@@ -340,7 +340,7 @@ void MilkdropPreset::initialize(const std::string& pathname)
     {
         std::cerr << "[Preset] loading file \"" << pathname << "\"..." << std::endl;
     }
-
+    std::cout << "[Preset] loading file \"" << pathname << "\"..." << std::endl;
     loadPresetFile(pathname);
 
     postloadInitialize();
@@ -368,6 +368,7 @@ void MilkdropPreset::initialize(std::istream& in)
         {
             std::cerr << "[Preset] failed to load from stream " << std::endl;
         }
+        std::cout << "[Preset] failed to load from stream " << std::endl;
 
         /// @bug how should we handle this problem? a well define exception?
         throw PresetFactoryException("failed to read from input stream");
