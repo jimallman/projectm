@@ -1046,12 +1046,20 @@ void ProjectM::RecreateRenderer()
                                             m_beatDetect.get(), m_textureSearchPaths);
 }
 
-std::vector<qvar_info> ProjectM::FetchQVars()
+std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
 {
     // parse the current preset to find any Q vars that are *used*
     std::vector<qvar_info> q_vars;  // include only as many params as we find
     // TODO: interrogate the equation trees for m_activePreset? or check built-in parameters?
-    MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
+    MilkdropPreset * preset;
+    if (hardCut)
+    {
+        preset = (MilkdropPreset*) & m_activePreset;
+    }
+    else
+    {
+        preset = (MilkdropPreset*) & m_activePreset2;
+    }
     /* Argh, this doesn't work (and probably wouldn't have access to comments)
     for (unsigned int i = 0; i < numQVariables; i++)
     {
