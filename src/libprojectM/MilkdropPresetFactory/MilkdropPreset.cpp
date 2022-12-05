@@ -60,7 +60,8 @@ MilkdropPreset::MilkdropPreset(MilkdropPresetFactory* factory, std::istream& in,
     , _factory(factory)
     , _presetOutputs(presetOutputs)
 {
-	std::cout << "[cout] created from stream, absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
+	std::cout << "[cout] created from stream, absoluteFilePath is \"" << this->absoluteFilePath() << "\"" << std::endl;
+	std::cout << "[cout]  ... and name is \"" << this->name() << "\"" << std::endl;
     initialize(in);
 }
 
@@ -76,7 +77,8 @@ MilkdropPreset::MilkdropPreset(MilkdropPresetFactory* factory, const std::string
     , _presetOutputs(presetOutputs)
 {
     //TODO: DEBUG(">>> absoluteFilePath is %s", absoluteFilePath.c_str());
-	std::cout << "[cout] created from path, absoluteFilePath is \"" << absoluteFilePath << "\"" << std::endl;
+	std::cout << "[cout] created from path, absoluteFilePath is \"" << this->absoluteFilePath() << "\"" << std::endl;
+	std::cout << "[cout]  ... and name is \"" << this->name() << "\"" << std::endl;
     initialize(absoluteFilePath);
 }
 
