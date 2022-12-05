@@ -312,7 +312,7 @@ public:
      */
     void DumpDebugImageOnNextFrame();
 
-    std::vector<qvar_info> FetchQVars();
+    std::vector<qvar_info> FetchQVars(bool hardCut);
 
     void UpdateQVars(std::vector<qvar_info> q_vars);
 
