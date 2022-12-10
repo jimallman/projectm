@@ -1046,12 +1046,20 @@ void ProjectM::RecreateRenderer()
                                             m_beatDetect.get(), m_textureSearchPaths);
 }
 
-std::vector<qvar_info> ProjectM::FetchQVars()
+std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
 {
     // parse the current preset to find any Q vars that are *used*
-    std::vector<qvar_info> q_vars(32);  // include only as many params as we find
+    std::vector<qvar_info> q_vars;  // include only as many params as we find
     // TODO: interrogate the equation trees for m_activePreset? or check built-in parameters?
-    MilkdropPreset * preset = (MilkdropPreset*) & m_activePreset;
+    MilkdropPreset * preset;
+    if (hardCut)
+    {
+        preset = (MilkdropPreset*) & m_activePreset;
+    }
+    else
+    {
+        preset = (MilkdropPreset*) & m_activePreset2;
+    }
     /* Argh, this doesn't work (and probably wouldn't have access to comments)
     for (unsigned int i = 0; i < numQVariables; i++)
     {
@@ -1081,13 +1089,14 @@ std::vector<qvar_info> ProjectM::FetchQVars()
     */
     // Let's try again, by parsing the source text file directly
     std::string presetPath = preset->absoluteFilePath();
-    std::ifstream file(presetPath);
+    //std::string presetPath = m_settings.presetPath;
+    std::ifstream file(presetPath.c_str());
 
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
-    found_var.q_name = presetPath;
-    found_var.alt_names = "TODO foo bar_BAZZ";
-    found_var.value = float(0.0);  // should be its *initial* value!
+    found_var.q_name = preset->name();
+    found_var.alt_names = presetPath;
+    found_var.value = float(1.23);  // should be its *initial* value!
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
     q_vars.push_back(found_var);
 
@@ -1102,7 +1111,7 @@ std::vector<qvar_info> ProjectM::FetchQVars()
 
             // TEST ONLY
             // build up qvar_info and add it to q_vars
-            qvar_info found_var; // = new qvar_info();
+            //qvar_info found_var; // = new qvar_info();
             found_var.q_name = (std::string)(line.c_str());
             found_var.alt_names = "TODO foo bar_BAZZ";
             found_var.value = float(0.0);  // should be its *initial* value!

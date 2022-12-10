@@ -609,11 +609,11 @@ void projectm_set_preset_rating(projectm_handle instance, unsigned int index, in
  * Get/set Q variables for the current preset
  */
 
-std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance)
+std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance, bool hardCut)
 {
     // return all names for Q[1-32] found in this preset, plus alt names and initial values
     auto projectMInstance = handle_to_instance(instance);
-    return projectMInstance->FetchQVars();
+    return projectMInstance->FetchQVars(hardCut);
 }
 
 void projectm_set_preset_qvars(projectm_handle instance, std::vector<qvar_info> q_vars)
