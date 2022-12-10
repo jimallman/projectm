@@ -835,7 +835,7 @@ PROJECTM_EXPORT void projectm_set_preset_rating(projectm_handle instance, unsign
  * @brief Gets all Q variables defined in the current preset.
  * @param instance The projectM instance handle.
  */
-PROJECTM_EXPORT std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance);
+PROJECTM_EXPORT std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance, bool hardCut);
 
 /**
  * @brief Sets some or all Q variables defined in the current preset.
