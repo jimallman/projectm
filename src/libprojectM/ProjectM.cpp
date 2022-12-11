@@ -1093,8 +1093,8 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     std::string presetPath = preset->absoluteFilePath();
     //std::string presetPath = m_settings.presetPath;
     std::ifstream file;
-    ///file.open(presetPath.c_str());
-    file.open(presetPath);
+    file.open(presetPath.c_str());
+    ///file.open(presetPath);
 
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
