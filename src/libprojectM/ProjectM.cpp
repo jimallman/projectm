@@ -34,6 +34,8 @@
 #include "TimeKeeper.hpp"
 
 #include <iostream>
+#include <cerrno>
+#include <cstring>
 
 namespace {
 constexpr int kMaxSwitchRetries = 10;
@@ -1156,7 +1158,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     }
     else
     {
-        std::cout << "Error opening file!" << std::endl;
+        std::cout << "  Error opening file: " << strerror(errno) << std::endl;
     }
     // sort the completed q_vars by Q-name (split and compar *number* component!)
     // this list should be ordered but sparse, e.g. (Q1, Q2, Q4, Q32)
