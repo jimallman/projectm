@@ -1100,12 +1100,15 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
     q_vars.push_back(found_var);
 
+    std::cout << "is file open? " << file.is_open() << std::endl;
     if (file.is_open()) 
     {
+        std::cout << "YES, we're going to read lines." << std::endl;
         // read in each line
         std::string line;
         while (std::getline(file, line)) 
         {
+            std::cout << "   [" << line.c_str() << "]" << std::endl;
             ///printf("%s", line.c_str());
 
 
@@ -1152,6 +1155,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     }
     // sort the completed q_vars by Q-name (split and compar *number* component!)
     // this list should be ordered but sparse, e.g. (Q1, Q2, Q4, Q32)
+    std::cout << "final size of q_vars: " << q_vars.size() << std::endl;
     return q_vars;
 }
 
