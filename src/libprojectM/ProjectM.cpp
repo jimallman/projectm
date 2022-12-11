@@ -1091,9 +1091,8 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     std::string presetPath = preset->absoluteFilePath();
     //std::string presetPath = m_settings.presetPath;
     std::ifstream file;
-    file.open(presetPath.c_str());
-    ///file.open(presetPath);
-
+    ///file.open(presetPath.c_str());
+    file.open(presetPath);
 
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
@@ -1103,7 +1102,6 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
     q_vars.push_back(found_var);
 
-    std::cout << "is file open? " << file.is_open() << std::endl;
     if (file.is_open()) 
     {
         std::cout << "YES, we're going to read lines." << std::endl;
@@ -1158,7 +1156,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     }
     else
     {
-        std::cout << "Error opening file!";
+        std::cout << "Error opening file!" << std::endl;
     }
     // sort the completed q_vars by Q-name (split and compar *number* component!)
     // this list should be ordered but sparse, e.g. (Q1, Q2, Q4, Q32)
