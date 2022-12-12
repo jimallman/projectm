@@ -1091,10 +1091,9 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     */
     // Let's try again, by parsing the source text file directly
     std::string presetPath = preset->absoluteFilePath();
-    const char * pfilename{presetPath};
+    const char * pfilename = presetPath.c_str();
     //std::string presetPath = m_settings.presetPath;
-    std::ifstream pfile;
-    pfile.open(pfilename);
+    std::ifstream pfile(pfilename);
     ///pfile.open(presetPath);
     /*
     FILE *pfile;
