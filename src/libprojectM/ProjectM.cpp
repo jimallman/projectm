@@ -1091,16 +1091,15 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     */
     // Let's try again, by parsing the source text file directly
     std::string presetPath = preset->absoluteFilePath();
+    const char * pfilename{presetPath};
     //std::string presetPath = m_settings.presetPath;
+    std::ifstream pfile;
+    pfile.open(pfilename);
+    ///pfile.open(presetPath);
     /*
-    std::ifstream file;
-    file.open(presetPath.c_str());
-    ///file.open(presetPath);
+    FILE *pfile;
+    pfile = fopen( presetPath.c_str(), "r" );
     */
-
-    FILE *file;
-    file = fopen( presetPath.c_str(), "r" );
-
 
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
@@ -1110,12 +1109,12 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
     q_vars.push_back(found_var);
 
-    if (file.is_open()) 
+    if (pfile.is_open())
     {
         std::cout << "YES, we're going to read lines." << std::endl;
         // read in each line
         std::string line;
-        while (std::getline(file, line)) 
+        while (std::getline(pfile, line))
         {
             std::cout << "   [" << line.c_str() << "]" << std::endl;
             ///printf("%s", line.c_str());
@@ -1160,7 +1159,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
             // add the found/initial value (IF it's a simple type vs expression?)
             */
         }
-        file.close();
+        pfile.close();
     }
     else
     {
