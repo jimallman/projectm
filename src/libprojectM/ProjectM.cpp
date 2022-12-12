@@ -1092,6 +1092,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     // Let's try again, by parsing the source text file directly
     std::string presetPath = preset->absoluteFilePath();
     const char * pfilename = presetPath.c_str();
+    std::cout << "Attempting to open this preset file: '" << pfilename << "'" << std::endl;
     //std::string presetPath = m_settings.presetPath;
     std::ifstream pfile(pfilename);
     ///pfile.open(presetPath);
@@ -1162,7 +1163,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     }
     else
     {
-        std::cout << "  Error opening file: " << strerror(errno) << std::endl;
+        std::cout << "  Error opening preset file: " << strerror(errno) << std::endl;
     }
     // sort the completed q_vars by Q-name (split and compar *number* component!)
     // this list should be ordered but sparse, e.g. (Q1, Q2, Q4, Q32)
