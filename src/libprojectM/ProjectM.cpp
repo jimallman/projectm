@@ -1062,8 +1062,8 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     {
         preset = (MilkdropPreset*) & m_activePreset2;
     }
-    cout << "CHECKING preset's absoluteFilePath: '" << preset->absoluteFilePath() << "'" << std::endl;
-    cout << "CHECKING preset's name: '" << preset->name() << "'" << std::endl;
+    std::cout << "CHECKING preset's absoluteFilePath: '" << preset->absoluteFilePath() << "'" << std::endl;
+    std::cout << "CHECKING preset's name: '" << preset->name() << "'" << std::endl;
     /* Argh, this doesn't work (and probably wouldn't have access to comments)
     for (unsigned int i = 0; i < numQVariables; i++)
     {
