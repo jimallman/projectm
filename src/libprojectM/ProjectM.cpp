@@ -1048,11 +1048,13 @@ void ProjectM::RecreateRenderer()
                                             m_beatDetect.get(), m_textureSearchPaths);
 }
 
-std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
+std::vector<qvar_info> ProjectM::FetchQVars(unsigned int* index)
+    
 {
     // parse the current preset to find any Q vars that are *used*
     std::vector<qvar_info> q_vars;  // include only as many params as we find
     // TODO: interrogate the equation trees for m_activePreset? or check built-in parameters?
+    /*
     MilkdropPreset preset;
     //std::unique_ptr<Preset> preset; ?
     if (hardCut)
@@ -1073,6 +1075,8 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     std::cout << "..." << std::endl;
     std::cout << "CHECKING m_activePreset2's absoluteFilePath: '" << ((MilkdropPreset*)m_activePreset2)->absoluteFilePath() << "'" << std::endl;
     std::cout << "CHECKING m_activePreset2's name: '" << ((MilkdropPreset*)m_activePreset2)->name() << "'" << std::endl;
+    */
+
     /* Argh, this doesn't work (and probably wouldn't have access to comments)
     for (unsigned int i = 0; i < numQVariables; i++)
     {
@@ -1101,18 +1105,15 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     }
     */
     // Let's try again, by parsing the source text file directly
-    std::string presetPath = preset->absoluteFilePath();
-    std::cout << presetPath << " 1. Attempting to open this preset file: '" << presetPath << "'" << std::endl;
+    // Retrieve this using the index passed in
+    std::string presetPath = m_presetLoader->getPresetURL(index);
+    std::cout << " 1. Attempting to open this preset URL: '" << presetPath << "'" << std::endl;
     const char *pfilename = presetPath.c_str();
-    std::cout << pfilename << " 2. Attempting to open this preset file: '" << pfilename << "'" << std::endl;
+    std::cout << " 2. Attempting to open the file: '" << pfilename << "'" << std::endl;
     //std::string presetPath = m_settings.presetPath;
     std::ifstream pfile(pfilename);
-    ///pfile.open(presetPath);
-    /*
-    FILE *pfile;
-    pfile = fopen( presetPath.c_str(), "r" );
-    */
 
+    /*
     // TEST ONLY
     qvar_info found_var; // = new qvar_info();
     found_var.q_name = preset->name();
@@ -1120,6 +1121,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     found_var.value = float(1.23);  // should be its *initial* value!
     // TODO: TEST FOR TYPE and return .int_val, .bool_val instead?
     q_vars.push_back(found_var);
+    */
 
     if (pfile.is_open())
     {
