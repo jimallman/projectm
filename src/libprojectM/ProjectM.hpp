@@ -312,7 +312,7 @@ public:
      */
     void DumpDebugImageOnNextFrame();
 
-    std::vector<qvar_info> FetchQVars(unsigned int* index);
+    std::vector<qvar_info> FetchQVars(unsigned int index);
 
     void UpdateQVars(std::vector<qvar_info> q_vars);
 

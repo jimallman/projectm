@@ -1048,7 +1048,7 @@ void ProjectM::RecreateRenderer()
                                             m_beatDetect.get(), m_textureSearchPaths);
 }
 
-std::vector<qvar_info> ProjectM::FetchQVars(unsigned int* index)
+std::vector<qvar_info> ProjectM::FetchQVars(unsigned int index)
     
 {
     // parse the current preset to find any Q vars that are *used*
@@ -1136,7 +1136,7 @@ std::vector<qvar_info> ProjectM::FetchQVars(unsigned int* index)
 
             // TEST ONLY
             // build up qvar_info and add it to q_vars
-            //qvar_info found_var; // = new qvar_info();
+            qvar_info found_var; // = new qvar_info();
             found_var.q_name = (std::string)(line.c_str());
             found_var.alt_names = "TODO foo bar_BAZZ";
             found_var.value = float(0.0);  // should be its *initial* value!
