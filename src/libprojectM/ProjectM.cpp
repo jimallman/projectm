@@ -1057,22 +1057,22 @@ std::vector<qvar_info> ProjectM::FetchQVars(bool hardCut)
     //std::unique_ptr<Preset> preset; ?
     if (hardCut)
     {
+        //preset = m_activePreset;
         //preset = (MilkdropPreset*) & m_activePreset;
-        preset = m_activePreset;
+        preset = (MilkdropPreset*) m_activePreset;
     }
     else
     {
-        //preset = (MilkdropPreset*) & m_activePreset2;
-        preset = m_activePreset2;
+        preset = (MilkdropPreset*) m_activePreset2;
     }
     std::cout << "CHECKING preset's absoluteFilePath: '" << preset->absoluteFilePath() << "'" << std::endl;
     std::cout << "CHECKING preset's name: '" << preset->name() << "'" << std::endl;
     std::cout << "..." << std::endl;
-    std::cout << "CHECKING m_activePreset's absoluteFilePath: '" << m_activePreset->absoluteFilePath() << "'" << std::endl;
-    std::cout << "CHECKING m_activePreset's name: '" << m_activePreset->name() << "'" << std::endl;
+    std::cout << "CHECKING m_activePreset's absoluteFilePath: '" << (MilkdropPreset*)m_activePreset->absoluteFilePath() << "'" << std::endl;
+    std::cout << "CHECKING m_activePreset's name: '" << (MilkdropPreset*)m_activePreset->name() << "'" << std::endl;
     std::cout << "..." << std::endl;
-    std::cout << "CHECKING m_activePreset2's absoluteFilePath: '" << m_activePreset2->absoluteFilePath() << "'" << std::endl;
-    std::cout << "CHECKING m_activePreset2's name: '" << m_activePreset2->name() << "'" << std::endl;
+    std::cout << "CHECKING m_activePreset2's absoluteFilePath: '" << (MilkdropPreset*)m_activePreset2->absoluteFilePath() << "'" << std::endl;
+    std::cout << "CHECKING m_activePreset2's name: '" << (MilkdropPreset*)m_activePreset2->name() << "'" << std::endl;
     /* Argh, this doesn't work (and probably wouldn't have access to comments)
     for (unsigned int i = 0; i < numQVariables; i++)
     {
