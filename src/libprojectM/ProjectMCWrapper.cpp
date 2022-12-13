@@ -615,7 +615,7 @@ std::vector<qvar_info> projectm_get_preset_qvars(projectm_handle instance, bool 
     unsigned int* index;
     auto projectMInstance = handle_to_instance(instance);
     projectMInstance->SelectedPresetIndex(*index);  // copies index value
-    unsigned int index2 = (int)index;
+    unsigned int index2 = (unsigned int)index;
     return projectMInstance->FetchQVars(index2);
 }
 
